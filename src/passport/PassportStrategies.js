@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { Strategy as GithubStrategy } from 'passport-github2';
-import {userModel} from '../dao/models/users.model.js'
+import {userModel} from '../persistence/mongo/models/users.model.js'
 
 
 passport.use('github', new GithubStrategy({

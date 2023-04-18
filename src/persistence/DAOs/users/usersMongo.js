@@ -1,9 +1,9 @@
-import { comparePasswords, hashPassword } from '../../utils.js';//cdo alguien se registar usamos el hasheo de la contraseña
-import { userModel } from '../models/users.model.js'
-import { cartsModel } from '../models/carts.model.js'
+import { comparePasswords, hashPassword } from '../../../utils.js';//cdo alguien se registar usamos el hasheo de la contraseña
+import { userModel } from '../../mongo/models/users.model.js'
+import { cartsModel } from '../../mongo/models/carts.model.js'
 
 export default class UsersManager {
-    async createUser(user) {
+    async create(user) {
         const { email, password } = user//contraseña q me pasan :123
         try {
             const existeUsuario = await userModel.find({ email })
@@ -25,7 +25,7 @@ export default class UsersManager {
         }
     }
 
-    async loginUser(user) { //comparar contraseña hasheada con la q ingresa el us
+    async login(user) { //comparar contraseña hasheada con la q ingresa el us
         const { email, password } = user //DE USER SACO amil y pasaword
         const usuario = await userModel.findOne({ email }) // se fija si existe un us con ese mail registradopasswordBD
         if (usuario) {//si existe un us q cumple con mail ejecuto el metodo comparePassword pasandole la passwrd q ingreso el us y la q  esta en la BD . el metodo nos da true o flase

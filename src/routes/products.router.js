@@ -8,7 +8,7 @@ import socketServer from '../server.js'
 // const path = './files/products.json'
 
 // -- // MongoDB // -- //
-import ProductManager from "../dao/mongoManager/ProductManager.js";
+import ProductManager from "../persistence/DAOs/products/ProductMongo.js";
 
 const router = Router()
 

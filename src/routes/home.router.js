@@ -1,6 +1,6 @@
 // archivo para el renderizzado de VISTAS
 import { Router } from "express"; //importo router
-import ProductManager from "../dao/mongoManager/ProductManager.js";
+import ProductManager from "../persistence/DAOs/products/ProductMongo.js"
 
 
 const router = Router()

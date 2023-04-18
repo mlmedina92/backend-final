@@ -12,9 +12,9 @@ import apiSessions from './routes/apiSessions.router.js'
 import jwtRouter from "./routes/jwt.router.js";
 import realTimeProductsRouter from "./routes/realTimeProducts.router.js";
 import { Server } from "socket.io";
-import MessageManager from "./dao/mongoManager/MessageManager.js"; // TODO meter la clase en chat.router.js
+import MessageManager from "./persistence/DAOs/messages/MessageMongo.js"; // TODO meter la clase en chat.router.js
 import mongoStore from "connect-mongo"
-import "./dao/dbConfig.js";
+import "./persistence/mongo/configMongo.js";
 import passport from "passport";
 import cookieParser from 'cookie-parser'
 import './passport/PassportStrategies.js'
