@@ -10,13 +10,13 @@ export default class UsersRepository{
     }
     async create(user){
         const userDBDTO=new UsersDBDTO(user)
-        const userDAO= await this.dao.create(userDBDTO)
+        const userDAO= await this.dao.create(userDBDTO) // ERROR this.dao.create is not a function
         const usersRespDTO=new UsersRespDTO(userDAO)
         return usersRespDTO
     }
     async login(userObj){
         const { email, password } = userObj
-        const user = await this.dao.login(userObj)
+        const user = await this.dao.login(userObj) // ERROR this.dao.login is not a function
         if (user) { //si el us existe ccreo esas sesiones
             const token = generateToken(user)
             req.session.email = email //creo sesion
