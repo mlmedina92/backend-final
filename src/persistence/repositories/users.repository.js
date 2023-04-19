@@ -10,7 +10,7 @@ export default class UsersRepository{
     }
     async create(user){
         const userDBDTO=new UsersDBDTO(user)
-        const userDAO= this.dao.create(userDBDTO)
+        const userDAO= await this.dao.create(userDBDTO)
         const usersRespDTO=new UsersRespDTO(userDAO)
         return usersRespDTO
     }

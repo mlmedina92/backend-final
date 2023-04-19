@@ -1,6 +1,6 @@
 import config from '../../config.js'
 import UsersFile from './users/usersFile.js'
-// import UsersMongo from './usersDAOs/usersMongo.js'
+// import UsersMongo from './users/usersMongo.js'
 import UsersRepository from '../repositories/users.repository.js'
 
 let usersDao
