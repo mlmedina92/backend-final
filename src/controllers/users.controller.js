@@ -1,7 +1,8 @@
 import { login, create } from '../services/users.service.js'
 
 export const loginUser = async (req, res) => {
-    const user = await login()
+    const usersObj = req.body
+    const user = await login(usersObj)
     res.json({ message: 'User logged', user })
 }
 
