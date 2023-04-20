@@ -8,19 +8,19 @@ export default class UsersFile {
         // TODO
     }
 
-    async getAll() {
-        try {
-            if (fs.existsSync(path)) {
-                const usersFile = await fs.promises.readFile(path, 'utf-8')
-                return JSON.parse(usersFile)
-            }
-            else {
-                return []
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // async getAll() {
+    //     try {
+    //         if (fs.existsSync(path)) {
+    //             const usersFile = await fs.promises.readFile(path, 'utf-8')
+    //             return JSON.parse(usersFile)
+    //         }
+    //         else {
+    //             return []
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     async create(objUser) {
         try {
