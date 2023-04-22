@@ -3,7 +3,7 @@
 import fs from 'fs' // para poder trabajar con archivos
 
 //creo la clase
-export default class ProductManager {
+export default class ProductsFile {
     constructor(path) { //cdo alguien creee una instancia un objeto, tiene q pasar la ruta de donde se va a guardar esa inf que nos envien
         this.path = path
         this.products = [];
