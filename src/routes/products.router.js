@@ -1,5 +1,5 @@
 import { Router } from "express";//para crear rutas fuera de server
-import socketServer from '../server.js'
+// import socketServer from '../server.js'
 import { getAll } from '../controllers/products.controller.js'
 
 const router = Router()

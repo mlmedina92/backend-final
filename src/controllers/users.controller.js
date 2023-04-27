@@ -7,6 +7,7 @@ export const loginUser = async (req, res) => {
         req.session.email = userLogged.user.email //creo sesion
         req.session.password = userLogged.user.password //creo sesion
         req.session.userName = userLogged.user.full_name
+        req.session.cartId = userLogged.user.cartId
         req.session.role = userLogged.user.role
         res.cookie('token', userLogged.token, {httpOnly: true})
            .redirect('/') //redireccion a home, httpOnly hace que la info del token no pueda ser extraido en el front

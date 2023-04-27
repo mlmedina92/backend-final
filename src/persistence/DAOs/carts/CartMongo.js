@@ -26,7 +26,7 @@ export default class CartManager {
     }
   }
 
-  async addToCart(cid, pid, quantity) {
+  async addToCart({cid, pid, quantity}) {
     try {
       const cart = await cartsModel.findById(cid);
 

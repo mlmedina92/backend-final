@@ -7,7 +7,7 @@ export default class FullUserDTO {
         this.last_name = user.last_name
         this.full_name = `${user.first_name} ${user.last_name}`
         this.age = user.age
-        this.cart = user.cart
+        this.cartId = user.cart.toString()
         this.role = user.role
     }
 }

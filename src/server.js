@@ -3,6 +3,7 @@ import session from "express-session"; //modulo session:seteo las config de la s
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
 import cartsRouter from "./routes/carts.router.js";
+import cartRouter from "./routes/cart.router.js";
 import producstRouter from "./routes/products.router.js";
 import homeRouter from "./routes/home.router.js";
 import chatRouter from "./routes/chat.router.js";
@@ -55,6 +56,7 @@ app.use(passport.initialize())
 // rutas
 app.use("/api/products", producstRouter); //cdo llamo a ruta /api/products traer los prods en un json
 app.use("/api/carts", cartsRouter);//cdo es /api son servicios
+app.use("/cart", cartRouter);//renderiza carrito
 app.use("/", homeRouter);//renderiza los prods
 app.use("/realTimeProducts", realTimeProductsRouter); 
 app.use('/chat', chatRouter)
