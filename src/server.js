@@ -2,9 +2,9 @@ import express from "express";
 import session from "express-session"; //modulo session:seteo las config de la session(QUE INF SE VA A GUARDAR)
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
-import cartsRouter from "./routes/carts.router.js";
+import cartsRouter from "./routes/api.carts.router.js";
 import cartRouter from "./routes/cart.router.js";
-import producstRouter from "./routes/products.router.js";
+import producstRouter from "./routes/api.products.router.js";
 import homeRouter from "./routes/home.router.js";
 import chatRouter from "./routes/chat.router.js";
 import usersRouter from "./routes/users.router.js";

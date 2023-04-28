@@ -1,10 +1,11 @@
 import { Router } from "express";//para crear rutas fuera de server
 // import socketServer from '../server.js'
-import { getAll } from '../controllers/products.controller.js'
+import { getAll, getByCode } from '../controllers/products.controller.js'
 
 const router = Router()
 
 router.get('/', getAll)
+router.get('/:pid', getByCode)
 
 export default router
 

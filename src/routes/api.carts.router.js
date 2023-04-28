@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { addToCart, getCart } from '../controllers/carts.controller.js'
+import { addToCart, deleteFromCart, getCart } from '../controllers/carts.controller.js'
 
 const router = Router()
 
 router.post('/:cid/products/:pid', addToCart)
+router.delete('/:cid/products/:pid', deleteFromCart)
 router.get('/:cid', getCart)
 
 // router.post('/:cid/products/:pid', async (req, res) => {
@@ -19,6 +20,25 @@ router.get('/:cid', getCart)
 //         const dataProds = await prods.json()
 //         res.render('productsList', { 'prods': dataProds.payload, 'isAdminRole': req.session.role == 'admin', 'userName': req.session.userName, 'cartId': req.session.cartId })//cdo estoy en / se va a renderizar el handlebars home
 //     }
+// })
+
+// /*
+// {
+//     id: 0, autoincremental como los productos
+//     products: [
+//         {
+//             quantity: number,
+//             product: { objeto tipo producto }
+//         }
+//     ]
+// }
+// */
+
+// //ruta para eliminar un producto de un carrito en particular:
+// router.delete('/:cid/products/:pid', async (req, res) => {
+//     const { cid, pid } = req.params//recibe inf por params: id del carrito y id del producto
+//     const cart = await cm.deleteFromCart(cid, pid)
+//     res.status(200).json({ message: 'Carrito actualizado ', cart: cart })
 // })
 
 export default router

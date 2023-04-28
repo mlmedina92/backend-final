@@ -1,27 +1,34 @@
-import BasicProductDTO from "../DTOs/products/basicProduct.dto.js";
+import ItemToAddDTO from "../DTOs/carts/itemToAdd.dto.js";
+import ItemToDeleteDTO from "../DTOs/carts/itemToDelete.dto.js";
+import ItemInCartDTO from "../DTOs/carts/itemInCart.dto.js";
 
-export default class CartsRepository{
-    constructor(dao){
-        this.dao=dao
+export default class CartsRepository {
+    constructor(dao) {
+        this.dao = dao
     }
 
-    async addToCart(item){
-        const itemToAdd=new ItemToAddDTO(item)
+    async addToCart(item) {
+        const itemToAdd = new ItemToAddDTO(item)
         const cartRes = await this.dao.addToCart(itemToAdd)
-        if (cartRes) { //si el us existe ccreo esas sesiones
+        if (cartRes) {
             return cartRes
-        }else{
+        } else {
             return null
         }
     }
 
-    async getCart(query){
-        const cartDAO= await this.dao.getCartById(query)
-        let cart = []
-        cartDAO.payload.forEach(prod => {
-            cart.push(new BasicProductDTO(prod))
-        });
-    
-        return {...cartDAO, 'payload': cart}
+    async deleteFromCart(item) {
+        const itemToDelete = new ItemToDeleteDTO(item)
+        const cartRes = await this.dao.deleteFromCart(itemToDelete)
+        if (cartRes) {
+            return cartRes
+        } else {
+            return null
+        }
+    }
+
+    async getCart({cid}) {
+        const cartDAO = await this.dao.getCartById(cid)
+        return cartDAO
     }
 }

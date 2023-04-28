@@ -1,17 +1,12 @@
 import { cartsModel } from "../../mongo/models/carts.model.js";
 
 export default class CartManager {
-  async readFile() {
-    const read = await cartsModel.find({});
-    return read;
-  }
-
   async createCart() {
     try {
-      const create = await cartsModel.create({
+      const cart = await cartsModel.create({
         products: [],
       });
-      return create;
+      return cart;
     } catch (err) {
       console.log(err);
     }
@@ -19,8 +14,8 @@ export default class CartManager {
 
   async getCartById(id) {
     try {
-      const getId = await cartsModel.findById(id);
-      return getId;
+      const cart = await cartsModel.findById(id);
+      return cart;
     } catch (err) {
       console.log(err);
     }
@@ -45,11 +40,11 @@ export default class CartManager {
           })
           return await cartsModel.findByIdAndUpdate(cid, { products: update })
         } else {
-          const addProd = await cartsModel.findOneAndUpdate(
+          await cartsModel.findOneAndUpdate(
             { _id: cid },
             { $push: { products: { productId: pid, quantity: quantity } } }
           );
-          return addProd
+          return { sucess: true }
         }
       } else {
         return { error: "Carrito no encontrado" };
@@ -59,18 +54,18 @@ export default class CartManager {
     }
   }
 
-  // async deleteFromCart(cid, pid) {
-  //   try {
-  //     const cart = await cartsModel.findById(cid);
+  async deleteFromCart({cid, pid}) {
+    try {
+      const cart = await cartsModel.findById(cid);
 
-  //     // me fijo si el carrito esta creado
-  //     if (!!cart) {
-  //       cart.products.deleteOne(pid)
+      // me fijo si el carrito esta creado
+      if (!!cart) {
+        cart.products.deleteOne(pid)
+      }
 
-  //     }
-
-  //   } catch (error) {
-  //     console.log(err);
-  //   }
-  // }
+      return true
+    } catch (error) {
+      console.log(err);
+    }
+  }
 }

@@ -4,13 +4,18 @@ export default class ProductsRepository{
     constructor(dao){
         this.dao=dao
     }
+
     async get(query){
         const prodsDAO= await this.dao.getProducts(query)
         let prods = []
         prodsDAO.payload.forEach(prod => {
             prods.push(new BasicProductDTO(prod))
         });
-    
         return {...prodsDAO, 'payload': prods}
+    }
+
+    async getById({pid}){
+        const prodsDAO= await this.dao.getProductById(pid)
+        return new BasicProductDTO(prodsDAO)
     }
 }

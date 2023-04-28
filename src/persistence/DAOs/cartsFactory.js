@@ -1,6 +1,5 @@
 import config from '../../config.js'
-import CartsFile from './cartsDAOs/cartsFile.js'
-// import CartsMongo from './cartsDAOs/cartsMongo.js'
+import CartsFile from './carts/CartFile.js'
 import CartsRepository from '../repositories/carts.repository.js'
 
 let cartDao
@@ -9,8 +8,8 @@ console.log(config.persistence);
 switch (config.persistence) {
     case 'MONGO':
         await import('../mongo/configMongo.js')
-        const { default: cartsMongo } = await import('./cartsDAOs/cartsMongo.js')
-        cartDao = new CartsRepository(cartsMongo)
+        const { default: CartsMongo } = await import('./carts/CartMongo.js')
+        cartDao = new CartsRepository(new CartsMongo())
         break;
 
     case 'FILE':

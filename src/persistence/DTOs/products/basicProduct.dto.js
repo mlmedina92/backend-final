@@ -1,6 +1,7 @@
 // una clase que recibe un objeto y da un objeto 
 export default class BasicProductDTO {
     constructor(prod) {
+        this.id=prod._id
         this.thumbnails=prod.thumbnails
         this.title = prod.title
         this.price=prod.price
