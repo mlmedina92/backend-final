@@ -2,7 +2,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import bcrypt from 'bcrypt' //modulo para encriptar
 import jwt from 'jsonwebtoken'
-import 'dotenv/config' // * Importo la funcion config() de 'dotenv'.
+import 'dotenv/config' // Importo la funcion config() de 'dotenv'.
 
 export const __dirname = dirname(fileURLToPath(import.meta.url))
 

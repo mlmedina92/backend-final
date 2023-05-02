@@ -9,23 +9,23 @@ export default class CartManager {
     async saveFile() {
         //Guardo o sobreescribo el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(this.carts, null, 2), 'utf-8')
-            console.log(this.path,  'Guardado con éxito')
+            // console.log(this.path,  'Guardado con éxito')
     }
 
     async readFile() {
         // Leer la inf del archivo 
         try {
             if (!fs.existsSync(this.path)) {
-                console.log('Error: Archivo no encontrado', this.path);
+                // console.log('Error: Archivo no encontrado', this.path);
                 return false;
             }
 
             const data = await fs.promises.readFile(this.path, 'utf-8')
             this.carts = JSON.parse(data) //la data que trae la promesa la guardo en mi obj
-            console.log(this.path, ' Leido con exito')
+            // console.log(this.path, ' Leido con exito')
             return this.carts
         } catch (error) {
-            console.log('Error: ', error)
+            // console.log('Error: ', error)
         }
 
         return false;
@@ -54,7 +54,7 @@ export default class CartManager {
         const cart = this.carts.find((cart) => cart.id === id)
 
         if (!cart) {//si no lo encuentra
-            console.log('El carrito ' + id + ' no se encontró')
+            // console.log('El carrito ' + id + ' no se encontró')
             return false
         }
 
@@ -81,7 +81,7 @@ export default class CartManager {
 
         this.saveFile()
 
-        console.log('Carrito actualizado con éxito');
+        // console.log('Carrito sactualizado con éxito');
         return cart
     }
 }

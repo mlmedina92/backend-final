@@ -14,8 +14,23 @@ export default class ProductsRepository{
         return {...prodsDAO, 'payload': prods}
     }
 
-    async getById({pid}){
+    async getById(pid){
         const prodsDAO= await this.dao.getProductById(pid)
         return new BasicProductDTO(prodsDAO)
+    }
+
+    async addProduct(prod){
+        const prodsDAO= await this.dao.addProduct(prod)
+        return new BasicProductDTO(prodsDAO)
+    }
+
+    async updateProductById(prod){
+        const prodsDAO= await this.dao.updateProductById(prod)
+        return new BasicProductDTO(prodsDAO)
+    }
+
+    async removeProductById(pid){
+        const prodId= await this.dao.removeProductById(pid)
+        return prodId
     }
 }

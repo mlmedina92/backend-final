@@ -3,7 +3,7 @@ import CartsFile from './carts/CartFile.js'
 import CartsRepository from '../repositories/carts.repository.js'
 
 let cartDao
-console.log(config.persistence);
+// console.log(config.persistence);
 
 switch (config.persistence) {
     case 'MONGO':

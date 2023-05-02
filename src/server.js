@@ -24,7 +24,7 @@ import './passport/PassportStrategies.js'
 const app = express();
 const PORT = 3000;
 
-console.log(__dirname); //Brinda el path exacto para acceder a la carpeta PUBLIC
+// console.log(__dirname); //Brinda el path exacto para acceder a la carpeta PUBLIC
 
 app.use(cookieParser())
 app.use(express.json());
@@ -72,7 +72,7 @@ const httpServer = app.listen(PORT, () => {
 });
 
 //servidor socketServer
-const socketServer = new Server(httpServer);
+export const socketServer = new Server(httpServer);
 
 const mm = new MessageManager(); // TODO
 

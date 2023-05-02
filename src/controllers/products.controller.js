@@ -1,11 +1,42 @@
-import { get, getById } from '../services/products.service.js'
+import { socketServer } from '../server.js'
+import { get, getById, add, update, remove } from '../services/products.service.js'
 
 export const getAll = async (req, res) => {
     const resp = await get(req.query)
-    res.json(resp)
+    res.status(200).json(resp)
 }
 
 export const getByCode = async (req, res) => {
-    const resp = await getById(req.params)
-    res.json(resp)
+    const resp = await getById(req.params.pid)
+    res.status(200).json(resp)
+}
+
+export const addProd = async (req, res) => {
+    const resp = await add(req.body)
+    if (resp) {
+        res.status(200).json({ message: 'Prod agregado con éxito', prod: req.body })
+        socketServer.emit('product-added', `Producto "${req.body.title}" agregado con exito`)
+    } else {
+        console.log('Error');
+    }
+}
+
+export const updateProd = async (req, res) => {
+    const resp = await update(req.body)
+    if (resp) {
+        res.status(200).json({ message: 'Prod actualizado con éxito', prod: req.body })
+        socketServer.emit('product-updated', `Producto "${req.body.title}" actualizado con exito`)
+    } else {
+        console.log('Error');
+    }
+}
+
+export const deleteProd = async (req, res) => {
+    const resp = await remove(req.body.id)
+    if (resp) {
+        res.status(200).json({ message: 'Prod eliminado con éxito', prod: req.body })
+        socketServer.emit('product-removed', `Producto "${req.body.id}" eliminado con exito`)
+    } else {
+        console.log('Error');
+    }
 }
