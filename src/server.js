@@ -22,7 +22,7 @@ import './passport/PassportStrategies.js'
 
 //Creacion del servidor
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 // console.log(__dirname); //Brinda el path exacto para acceder a la carpeta PUBLIC
 
