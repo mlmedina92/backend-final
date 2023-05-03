@@ -36,7 +36,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(
   session({ //configuro el storage de session en mongo
       secret: 'sesionKey',
-      resave: false,
+      resave: true,
       saveUninitialized: true,
       cookie: { maxAge: 30000 },
       store: new mongoStore({//ahora creo un new mongostore no filestore
@@ -74,7 +74,7 @@ const httpServer = app.listen(PORT, () => {
 //servidor socketServer
 export const socketServer = new Server(httpServer);
 
-const mm = new MessageManager(); // TODO
+const mm = new MessageManager(); // TODO refactor
 
 //Emicion de eventos para el chat
 socketServer.on("connection", (socket) => {

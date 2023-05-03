@@ -4,24 +4,24 @@ for(const form of document.forms) {
         e.preventDefault()
 
         // obtengo los datos a enviar del form
-        let formData = new FormData();
+        let formData = {}
         for(const field of e.currentTarget.elements) {
             if (field.type !== 'submit') {
-                formData.append(field.name, field.value)
+                formData[field.name] = field.value
             }
         }
 
-        debugger
         // lamada a la API de products
         const api = await fetch(e.currentTarget.action,
             {
-                headers: {
-                    "Access-Control-Allow-Methods": "*"
-                },
                 method: e.currentTarget.attributes['method'].value,
-                body: formData
+                headers: {
+                    "Access-Control-Allow-Methods": "*",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
             })
-        debugger
         const data = await api.json()
+        alert(data)
     }
 }

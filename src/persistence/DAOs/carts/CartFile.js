@@ -9,7 +9,7 @@ export default class CartManager {
     async saveFile() {
         //Guardo o sobreescribo el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(this.carts, null, 2), 'utf-8')
-            // console.log(this.path,  'Guardado con éxito')
+        // console.log(this.path,  'Guardado con éxito')
     }
 
     async readFile() {
@@ -25,7 +25,7 @@ export default class CartManager {
             // console.log(this.path, ' Leido con exito')
             return this.carts
         } catch (error) {
-            // console.log('Error: ', error)
+            console.log('Error: ', error)
         }
 
         return false;

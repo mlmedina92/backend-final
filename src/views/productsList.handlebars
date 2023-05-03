@@ -19,16 +19,25 @@
             <div class="card-body">
                 {{#if ../isAdminRole}}
                     <form action="/api/products" method="put">
+                        <input type="hidden" name="id" value="{{id}}">
                         <label for="title-{{code}}">Titulo:</label>
                         <input type="text" id="title-{{code}}" name="title" value="{{title}}">
-                        <label for="category-{{code}}">category:</label>
+                        <label for="code-{{code}}">Code:</label>
+                        <input type="text" id="code-{{code}}" name="code" value="{{code}}">
+                        <label for="category-{{code}}">Category:</label>
                         <input type="text" id="category-{{code}}" name="category" value="{{category}}">
-                        <label for="description-{{code}}">description:</label>
+                        <label for="description-{{code}}">Description:</label>
                         <textarea type="text" id="description-{{code}}" name="description">{{description}}</textarea>
+                        <label for="status-{{code}}">Status:</label>
+                        <input type="text" id="status-{{code}}" name="status" value="{{#if status}}true{{else}}false{{/if}}">
+                        <label for="stock-{{code}}">Stock:</label>
+                        <input type="text" id="stock-{{code}}" name="stock" value="{{stock}}">
+                        <label for="thumbnails-{{code}}">Thumbnails:</label>
+                        <input type="text" id="thumbnails-{{code}}" name="thumbnails" value="{{thumbnails}}">
                         <div class="card-footer">
                             <label for="price-{{code}}">Precio:</label>
                             <input type="number" id="price-{{code}}" name="price" value="{{price}}">
-                            <button type="submit" value="Submit">Editar</button>
+                            <button type="submit" value="Submit">Actualizar</button>
                         </div>
                     </form>
                     <form action="/api/products" method="delete">
@@ -57,25 +66,31 @@
     {{#if isAdminRole}}
         <form action="/api/products" method="post">
             <label for="title-new">Titulo:</label>
-            <input type="text" id="title-new" name="title" value="{{title}}">
-            <label for="category-new">category:</label>
-            <input type="text" id="category-new" name="category" value="{{category}}">
-            <label for="description-new">description:</label>
-            <textarea type="text" id="description-new" name="description">{{description}}</textarea>
+            <input type="text" id="title-new" name="title">
+            <label for="title-new">Code:</label>
+            <input type="text" id="code-new" name="code">
+            <label for="category-new">Category:</label>
+            <input type="text" id="category-new" name="category">
+            <label for="description-new">Description:</label>
+            <textarea type="text" id="description-new" name="description"></textarea>
+            <label for="stock-{{code}}">Stock:</label>
+            <input type="text" id="stock-{{code}}" name="stock">
+            <label for="thumbnails-{{code}}">Thumbnails:</label>
+            <input type="text" id="thumbnails-{{code}}" name="thumbnails">
             <div class="card-footer">
                 <label for="price-new">Precio:</label>
-                <input type="number" id="price-new" name="price" value="{{price}}">
+                <input type="number" id="price-new" name="price">
                 <button type="submit" value="Submit">Agregar nuevo</button>
             </div>
         </form>
     {{/if}}
 </div>
 
-{{!-- script que bserva los sockets --}}
+{{!-- script que sobre-escribe el onsubmit de los forms --}}
 <script src="productForms.js"></script>
 
 {{!-- script de soket.io para trabajar del lado del cliente --}}
 <script src="/socket.io/socket.io.js"></script>
 
-{{!-- script que bserva los sockets --}}
+{{!-- script que observa los sockets --}}
 <script src="realTimeProducts.js"></script>

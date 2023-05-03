@@ -21,7 +21,7 @@ export default class CartManager {
     }
   }
 
-  async addToCart({cid, pid, quantity}) {
+  async addToCart({ cid, pid, quantity }) {
     try {
       const cart = await cartsModel.findById(cid);
 
@@ -54,17 +54,18 @@ export default class CartManager {
     }
   }
 
-  async deleteFromCart({cid, pid}) {
+  async deleteFromCart({ cid, pid }) {
     try {
       const cart = await cartsModel.findById(cid);
 
       // me fijo si el carrito esta creado
       if (!!cart) {
-        cart.products.deleteOne(pid)
+        const prods = cart.products.filter(i => i.productId === pid)
+        await cartsModel.findByIdAndUpdate(cid, { products: prods })
       }
-
+      
       return true
-    } catch (error) {
+    } catch (err) {
       console.log(err);
     }
   }

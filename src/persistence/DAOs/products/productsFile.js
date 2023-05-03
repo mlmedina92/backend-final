@@ -38,7 +38,7 @@ export default class ProductsFile {
         // validar que todos los campos existan 
 
         if (!title || !description || !code || !price || !stock || !category) {
-            console.log('Todos los parametros son obligatorios')
+            console.log('Todos los parámetros son obligatorios')
             return false;
         }
 

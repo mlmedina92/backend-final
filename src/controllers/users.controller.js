@@ -9,8 +9,8 @@ export const loginUser = async (req, res) => {
         req.session.userName = userLogged.user.full_name
         req.session.cartId = userLogged.user.cartId
         req.session.role = userLogged.user.role
-        res.cookie('token', userLogged.token, {httpOnly: true})
-           .redirect('/') //redireccion a home, httpOnly hace que la info del token no pueda ser extraido en el front
+        res.cookie('token', userLogged.token, { httpOnly: true })
+            .redirect('/') //redireccion a home, httpOnly hace que la info del token no pueda ser extraido en el front
         // res.json({ message: 'User logged', user })
     } else {
         res.redirect('/users/errorLogin')// si no exite lo lleva a otra vista
@@ -21,9 +21,9 @@ export const createUser = async (req, res) => {
     const usersObj = req.body
     const newUser = await create(usersObj)
     if (newUser) {
-        res.redirect('/')    
+        res.redirect('/')
         // res.json({ message: 'user created', user: newUser })
-   }else{
-    res.redirect('/users/errorRegistro')
+    } else {
+        res.redirect('/users/errorRegistro')
     }
 }

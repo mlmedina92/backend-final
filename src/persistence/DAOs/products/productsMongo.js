@@ -11,13 +11,17 @@ export default class ProductManager {
     category,
     thumbnails,
   }) {
+    if(typeof thumbnails === 'string') {
+      thumbnails = thumbnails.split(',')
+    }
+
     const addProd = await productsModel.create({
       title: title,
       description: description,
       code: code,
-      price: price,
-      status: status,
-      stock: stock,
+      price : Number(price),
+      status : status,
+      stock : Number(stock),
       category: category,
       thumbnails: thumbnails,
     });
@@ -74,7 +78,8 @@ export default class ProductManager {
   }
 
   async updateProductById(prodToUpdate) {
-    const {
+    let {
+      id,
       title,
       description,
       code,
@@ -83,25 +88,24 @@ export default class ProductManager {
       stock,
       category,
       thumbnails,
-    } = prodToUpdate.data;
+    } = prodToUpdate;
 
-    const found = await this.getProductById(prodToUpdate.id);
+    if(typeof thumbnails === 'string') {
+      thumbnails = thumbnails.split(',')
+    }
+
+    const found = await this.getProductById(id);
 
     found.title = title;
     found.description = description;
     found.code = code;
-    found.price = price;
-    found.status = status;
-    found.stock = stock;
+    found.price = Number(price);
+    found.status = (status.toLowerCase() === "true");
+    found.stock = Number(stock);
     found.category = category;
     found.thumbnails = thumbnails;
 
-    const update = await productsModel.findOneAndUpdate(
-      { _id: prodToUpdate.id },
-      {
-        $set: found,
-      }
-    );
+    const update = await productsModel.findOneAndUpdate({ _id: id }, { $set: found });
 
     return update;
   }
