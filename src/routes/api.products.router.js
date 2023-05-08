@@ -23,17 +23,15 @@ router.post('/', addProd)
 router.put('/', updateProd)
 /* ejemplo de body para llamar al put
 {
-"id": 5,
-"data": {
-    "title": "jabon ala plus",
-    "description": "jabon ala plus",
-    "code": "jabon-plus",
-    "price": 1,
-    "status": false,
-    "stock": 0,
-    "category": "productos1",
-    "thumbnails": ["imagen1.png","imagen2.png"]
-  }
+  "id": 5,
+  "title": "jabon ala plus",
+  "description": "jabon ala plus",
+  "code": "jabon-plus",
+  "price": 1,
+  "status": false,
+  "stock": 0,
+  "category": "productos1",
+  "thumbnails": ["imagen1.png","imagen2.png"]
 }
 */
 

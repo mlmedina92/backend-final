@@ -16,24 +16,25 @@
                 <img src="{{this}}" class="img-fluid w-100" alt="{{title}}" />
                 {{/each}}
             </div>
-            <div class="card-body">
                 {{#if ../isAdminRole}}
                     <form action="/api/products" method="put">
-                        <input type="hidden" name="id" value="{{id}}">
-                        <label for="title-{{code}}">Titulo:</label>
-                        <input type="text" id="title-{{code}}" name="title" value="{{title}}">
-                        <label for="code-{{code}}">Code:</label>
-                        <input type="text" id="code-{{code}}" name="code" value="{{code}}">
-                        <label for="category-{{code}}">Category:</label>
-                        <input type="text" id="category-{{code}}" name="category" value="{{category}}">
-                        <label for="description-{{code}}">Description:</label>
-                        <textarea type="text" id="description-{{code}}" name="description">{{description}}</textarea>
-                        <label for="status-{{code}}">Status:</label>
-                        <input type="text" id="status-{{code}}" name="status" value="{{#if status}}true{{else}}false{{/if}}">
-                        <label for="stock-{{code}}">Stock:</label>
-                        <input type="text" id="stock-{{code}}" name="stock" value="{{stock}}">
-                        <label for="thumbnails-{{code}}">Thumbnails:</label>
-                        <input type="text" id="thumbnails-{{code}}" name="thumbnails" value="{{thumbnails}}">
+                        <div class="card-body">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <label for="title-{{code}}">Titulo:</label>
+                            <input type="text" id="title-{{code}}" name="title" value="{{title}}">
+                            <label for="code-{{code}}">Code:</label>
+                            <input type="text" id="code-{{code}}" name="code" value="{{code}}">
+                            <label for="category-{{code}}">Category:</label>
+                            <input type="text" id="category-{{code}}" name="category" value="{{category}}">
+                            <label for="description-{{code}}">Description:</label>
+                            <textarea type="text" id="description-{{code}}" name="description">{{description}}</textarea>
+                            <label for="status-{{code}}">Status:</label>
+                            <input type="text" id="status-{{code}}" name="status" value="{{#if status}}true{{else}}false{{/if}}">
+                            <label for="stock-{{code}}">Stock:</label>
+                            <input type="text" id="stock-{{code}}" name="stock" value="{{stock}}">
+                            <label for="thumbnails-{{code}}">Thumbnails:</label>
+                            <input type="text" id="thumbnails-{{code}}" name="thumbnails" value="{{thumbnails}}">
+                        </div>
                         <div class="card-footer">
                             <label for="price-{{code}}">Precio:</label>
                             <input type="number" id="price-{{code}}" name="price" value="{{price}}">
@@ -45,11 +46,13 @@
                         <button type="submit" value="Submit">Eliminar</button>
                     </form>
                 {{else}}
-                    <h5 class="card-title">{{title}}</h5>
-                    <p class="card-text"><small><strong>{{category}}</strong></small></p>
-                    <p class="card-text"><small>{{description}}</small></p>
+                    <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-text"><small><strong>{{category}}</strong></small></p>
+                        <p class="card-text"><small>{{description}}</small></p>
+                    </div>
                     <div class="card-footer">
-                        <p class="card-text"><strong>$ {{price}}</strong></p>
+                        <p class="card-text"><strong>${{price}}</strong></p>
                         <form action="/api/carts/{{../cartId}}/products/{{id}}" method="post">
                             <label for="qty-{{code}}">Cantidad:</label>
                             <input type="number" id="qty-{{code}}" name="quantity" value="1">
@@ -57,7 +60,6 @@
                         </form>
                     </div>
                 {{/if}}
-            </div>
         </div>
     </div>
     {{else}}

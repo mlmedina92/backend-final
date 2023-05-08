@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { addToCart, deleteFromCart, getCart } from '../controllers/carts.controller.js'
+import { addToCart, deleteFromCart, getCart, purchaseCart } from '../controllers/carts.controller.js'
 
 const router = Router()
 
 router.post('/:cid/products/:pid', addToCart)
 router.delete('/:cid/products/:pid', deleteFromCart)
 router.get('/:cid', getCart)
+router.post('/:cid/purchase', purchaseCart)
+
 
 // router.post('/:cid/products/:pid', async (req, res) => {
 //     // si el us no esta logeado

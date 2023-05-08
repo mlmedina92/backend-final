@@ -57,14 +57,11 @@ export default class CartManager {
   async deleteFromCart({ cid, pid }) {
     try {
       const cart = await cartsModel.findById(cid);
-
-      // me fijo si el carrito esta creado
-      if (!!cart) {
+      if (!!cart) { // si el carrito esta creado
         const prods = cart.products.filter(i => i.productId === pid)
         await cartsModel.findByIdAndUpdate(cid, { products: prods })
       }
-      
-      return true
+      return { sucess: true }
     } catch (err) {
       console.log(err);
     }
