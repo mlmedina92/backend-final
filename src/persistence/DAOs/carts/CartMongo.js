@@ -1,4 +1,6 @@
-import { cartsModel } from "../../mongo/models/carts.model.js";
+import { cartsModel } from "../../mongo/models/carts.model.js"
+import CustomError from '../../../utils/errors/CustomError.js'
+import { ErrorsName } from '../../../utils/errors/errors.enum.js'
 
 export default class CartManager {
   async createCart() {
@@ -7,8 +9,12 @@ export default class CartManager {
         products: [],
       });
       return cart;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.CREATING_CART,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 
@@ -16,8 +22,12 @@ export default class CartManager {
     try {
       const cart = await cartsModel.findById(id);
       return cart;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.GETTING_CART,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 
@@ -44,13 +54,17 @@ export default class CartManager {
             { _id: cid },
             { $push: { products: { productId: pid, quantity: quantity } } }
           );
-          return { sucess: true }
+          return { success: true }
         }
       } else {
         return { error: "Carrito no encontrado" };
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.ADDING_CART,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 
@@ -58,12 +72,16 @@ export default class CartManager {
     try {
       const cart = await cartsModel.findById(cid);
       if (!!cart) { // si el carrito esta creado
-        const prods = cart.products.filter(i => i.productId === pid)
+        const prods = cart.products.filter(i => i.productId !== pid)
         await cartsModel.findByIdAndUpdate(cid, { products: prods })
       }
-      return { sucess: true }
-    } catch (err) {
-      console.log(err);
+      return { success: true, redirectTo: '/cart' } // redirectTo cart para refrescar la página del carrito
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.DELETING_CART,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 }

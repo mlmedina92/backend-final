@@ -12,7 +12,7 @@ export default router
 // // archivo para el renderizzado de VISTAS
 // import { Router } from "express"; //importo router
 // import UsersManager from "../dao/mongoManager/UsersManager.js";
-// import { generateToken } from "../utils.js";
+// import { generateToken } from "../utils/helper.js";
 
 // const router = Router()
 

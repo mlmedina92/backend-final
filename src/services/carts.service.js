@@ -14,8 +14,3 @@ export const get = async (query) => {
      const cart = await cartDao.getCart(query)
      return cart
 }
-
-export const purchase = async (query) => {
-     const cart = await cartDao.purchaseCart(query)
-     return cart
-}

@@ -1,5 +1,7 @@
 import fs from 'fs'
 import { __dirname } from '../../../utils.js'
+import CustomError from '../../../utils/errors/CustomError.js'
+import { ErrorsName } from '../../../utils/errors/errors.enum.js'
 
 const path = __dirname + '/Users.json'
 
@@ -38,7 +40,11 @@ export default class UsersFile {
             return newUser
 
         } catch (error) {
-            console.log(error);
-        }
+            CustomError.createCustomError({
+              name: ErrorsName.CREATING_USER,
+              cause: error.cause || error.stack,
+              message: error.message,
+            })
+          }
     }
 }

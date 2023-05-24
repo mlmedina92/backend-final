@@ -1,11 +1,11 @@
 // recorro los forms para ponerle el evento onsubmit (agregar, editar, eliminar...)
-for(const form of document.forms) {
+for (const form of document.forms) {
     form.onsubmit = async (e) => {
         e.preventDefault()
 
         // obtengo los datos a enviar del form
         let formData = {}
-        for(const field of e.currentTarget.elements) {
+        for (const field of e.currentTarget.elements) {
             if (field.type !== 'submit') {
                 formData[field.name] = field.value
             }
@@ -22,6 +22,15 @@ for(const form of document.forms) {
                 body: JSON.stringify(formData)
             })
         const data = await api.json()
-        alert(data)
+
+        if (data.success) {
+            alert('Operación existosa!')
+        } else {
+            alert(JSON.stringify(data))
+        }
+        
+        if (data.redirectTo) {
+            window.location.href = data.redirectTo
+        }
     }
 }

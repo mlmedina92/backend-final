@@ -4,7 +4,6 @@ import ProductsFile from './products/productsFile.js'
 import ProductsRepository from '../repositories/products.repository.js'
 
 let productsDao
-// console.log(config.persistence);
 
 switch (config.persistence) {
     case 'MONGO':

@@ -1,4 +1,5 @@
 import fs from 'fs'
+import logger from '../../../utils/winston.js'
 
 export default class CartManager {
     constructor(path) { //Cdo alguien cree una instancia, un objeto tiene que pasar la ruta de donde se va a guardar esa inf. que nos envien
@@ -9,23 +10,23 @@ export default class CartManager {
     async saveFile() {
         //Guardo o sobreescribo el archivo
         await fs.promises.writeFile(this.path, JSON.stringify(this.carts, null, 2), 'utf-8')
-        // console.log(this.path,  'Guardado con éxito')
+        logger.debug('Guardado con éxito: ' + this.path)
     }
 
     async readFile() {
         // Leer la inf del archivo 
         try {
             if (!fs.existsSync(this.path)) {
-                // console.log('Error: Archivo no encontrado', this.path);
+                logger.debug('Error: Archivo no encontrado', this.path);
                 return false;
             }
 
             const data = await fs.promises.readFile(this.path, 'utf-8')
             this.carts = JSON.parse(data) //la data que trae la promesa la guardo en mi obj
-            // console.log(this.path, ' Leido con exito')
+            logger.debug('Leido con exito: ' + this.path)
             return this.carts
         } catch (error) {
-            console.log('Error: ', error)
+            logger.error('Error: ' + error)
         }
 
         return false;
@@ -54,7 +55,7 @@ export default class CartManager {
         const cart = this.carts.find((cart) => cart.id === id)
 
         if (!cart) {//si no lo encuentra
-            // console.log('El carrito ' + id + ' no se encontró')
+            logger.debug('El carrito ' + id + ' no se encontró')
             return false
         }
 
@@ -81,7 +82,7 @@ export default class CartManager {
 
         this.saveFile()
 
-        // console.log('Carrito sactualizado con éxito');
+        logger.debug('Carrito sactualizado con éxito');
         return cart
     }
 }

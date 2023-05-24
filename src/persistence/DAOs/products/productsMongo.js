@@ -1,4 +1,6 @@
-import { productsModel } from "../../mongo/models/products.model.js";
+import { productsModel } from "../../mongo/models/products.model.js"
+import CustomError from '../../../utils/errors/CustomError.js'
+import { ErrorsName } from '../../../utils/errors/errors.enum.js'
 
 export default class ProductManager {
   async addProduct({
@@ -11,21 +13,29 @@ export default class ProductManager {
     category,
     thumbnails,
   }) {
-    if(typeof thumbnails === 'string') {
-      thumbnails = thumbnails.split(',')
-    }
+    try {
+      if (typeof thumbnails === 'string') {
+        thumbnails = thumbnails.split(',')
+      }
 
-    const addProd = await productsModel.create({
-      title: title,
-      description: description,
-      code: code,
-      price : Number(price),
-      status : status,
-      stock : Number(stock),
-      category: category,
-      thumbnails: thumbnails,
-    });
-    return addProd;
+      const addProd = await productsModel.create({
+        title: title,
+        description: description,
+        code: code,
+        price: Number(price),
+        status: status,
+        stock: Number(stock),
+        category: category,
+        thumbnails: thumbnails,
+      });
+      return addProd;
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.CREATING_PROD,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
+    }
   }
 
   // consultar todos
@@ -64,7 +74,7 @@ export default class ProductManager {
     const status = prods !== 'error' ? 'success' : 'error' // como seria????
     const prevLink = prods.hasPrevPage ? `http://localhost:3000/api/products?page=${prods.prevPage}` : null
     const nextLink = prods.hasNextPage ? `http://localhost:3000/api/products?page=${prods.nextPage}` : null
-    
+
     return { ...prods, status: status, prevLink: prevLink, nextLink: nextLink };
   }
 
@@ -72,8 +82,12 @@ export default class ProductManager {
     try {
       const getById = await productsModel.findById(id);
       return getById;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.GETTING_PROD,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 
@@ -90,7 +104,7 @@ export default class ProductManager {
       thumbnails,
     } = prodToUpdate;
 
-    if(typeof thumbnails === 'string') {
+    if (typeof thumbnails === 'string') {
       thumbnails = thumbnails.split(',')
     }
 
@@ -114,8 +128,12 @@ export default class ProductManager {
     try {
       const deleted = await productsModel.findByIdAndDelete(id);
       return deleted;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      CustomError.createCustomError({
+        name: ErrorsName.REMOVING_PROD,
+        cause: error.cause || error.stack,
+        message: error.message,
+      })
     }
   }
 }
