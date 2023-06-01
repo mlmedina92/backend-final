@@ -25,6 +25,8 @@ import './passport/PassportStrategies.js'
 // import { errorMiddleware } from './utils/errors/errors.middleware.js'
 import logger from './utils/winston.js'
 import { createLog } from './middlewares/winston.middleware.js'
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSetup } from './swaggerSpecs.js'
 
 //Creacion del servidor
 const app = express();
@@ -88,6 +90,9 @@ app.get('/loggerTest', function (req, res) {
   logger.fatal('log fatal')
   res.status(200).send('Logger test success')
 })
+
+//swagger documentation endpoint
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
 
 //El servidor escucha al puerto
 const httpServer = app.listen(PORT, () => {

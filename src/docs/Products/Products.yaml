@@ -1,0 +1,247 @@
+paths:
+  /api/products:
+    get:
+      summary: Get all products
+      tags: 
+        - Products
+      responses:
+        "200":
+          description: All products
+          content:
+            application/json:
+              schemas:  
+                type: Array
+                items:
+                  $ref: '#/components/schemas/FullProduct'
+        "500":
+          description: Server error
+        "400":
+          description: Missing data
+    post: 
+      summary: Add one product
+      tags: 
+        - Products
+      parameters:        
+        - name: thumbnails
+          in: body
+          description: Images array
+        - name: title
+          in: body
+          description: Product title
+        - name: price
+          in: body
+          description: Product price
+        - name: code
+          in: body
+          description: Product code
+        - name: stock
+          in: body
+          description: Product stock
+        - name: isNew
+          in: body
+          description: New product flag
+        - name: category
+          in: body
+          description: Product category
+        - name: description
+          in: body
+          description: Product description
+      responses:
+        "200":
+          description: Product added
+          content:
+            application/json:
+              schemas:  
+                $ref: '#/components/schemas/FullProduct'
+              example:
+                thumbnails: [
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg,
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg
+                ]
+                title: Pizza Margarita
+                price: 800
+                code: 234BCD
+                stock: 333
+                isNew: false
+                category: pizzas
+                description: Una pizza básica y clásica de tomate, queso mozzarella y albahaca fresca.
+        "500":
+          description: Server error
+        "400":
+          description: Missing data
+    put: 
+      summary: Update one product
+      tags: 
+        - Products
+      parameters:
+        - name: id
+          in: body
+          description: Product identifier (existing)
+        - name: thumbnails
+          in: body
+          description: Images array
+        - name: title
+          in: body
+          description: Product title
+        - name: price
+          in: body
+          description: Product price
+        - name: code
+          in: body
+          description: Product code
+        - name: stock
+          in: body
+          description: Product stock
+        - name: isNew
+          in: body
+          description: New product flag
+        - name: category
+          in: body
+          description: Product category
+        - name: description
+          in: body
+          description: Product description
+      responses:
+        "200":
+          description: Product updated
+          content:
+            application/json:
+              schemas:  
+                $ref: '#/components/schemas/FullProduct'
+              example:
+                id: 63f948be491ba8de92f1b017
+                thumbnails: [
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg,
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg
+                ]
+                title: Pizza Margarita
+                price: 800
+                code: 234BCD
+                stock: 333
+                isNew: false
+                category: pizzas
+                description: Una pizza básica y clásica de tomate, queso mozzarella y albahaca fresca.
+        "500":
+          description: Server error
+        "400":
+          description: Missing data
+    delete: 
+      summary: Remove one product
+      tags: 
+        - Products
+      parameters:
+        - name: id
+          in: body
+          description: Product identification
+      responses:
+        "200":
+          description: Product removed
+          content:
+            application/json:
+              example:
+                id: 63f948be491ba8de92f1b019
+        "500":
+          description: Server error
+        "400":
+          description: Missing data
+  /api/products/{pid}:
+    get:
+      summary: Get one product
+      tags: 
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        description: Product identifier
+      responses:
+        "200":
+          description: One Product
+          content:
+            application/json:
+              schemas:  
+                $ref: '#/components/schemas/FullProduct'
+              example:
+                id: 63f948be491ba8de92f1b017
+                thumbnails: [
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg,
+                  https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg
+                ]
+                title: Pizza Margarita
+                price: 800
+                code: 234BCD
+                stock: 333
+                isNew: false
+                category: pizzas
+                description: Una pizza básica y clásica de tomate, queso mozzarella y albahaca fresca.
+        "500":
+          description: Server error
+        "400":
+          description: Missing data
+
+components:
+  schemas:
+    BasicProduct:
+      type: object
+      properties:
+        thumbnails:
+          type: Array
+        title:
+          type: string
+        price:
+          type: integer
+        code:
+          type: string
+        stock:
+          type: integer
+        isNew:
+          type: boolean
+        category:
+          type: string
+        description:
+          type: string
+      example:
+        thumbnails: [
+          https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg,
+          https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg
+        ]
+        title: Pizza Margarita
+        price: 800
+        code: 234BCD
+        stock: 333
+        isNew: false
+        category: pizzas
+        description: Una pizza básica y clásica de tomate, queso mozzarella y albahaca fresca.
+    FullProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        thumbnails:
+          type: Array
+        title:
+          type: string
+        price:
+          type: integer
+        code:
+          type: string
+        stock:
+          type: integer
+        isNew:
+          type: boolean
+        category:
+          type: string
+        description:
+          type: string
+      example:
+        id: 63f948be491ba8de92f1b017
+        thumbnails: [
+          https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg,
+          https://pierorestaurante.com/wp-content/uploads/2018/11/Pizza_margarita_receta_plato_opt-1.jpg
+        ]
+        title: Pizza Margarita
+        price: 800
+        code: 234BCD
+        stock: 333
+        isNew: false
+        category: pizzas
+        description: Una pizza básica y clásica de tomate, queso mozzarella y albahaca fresca.
